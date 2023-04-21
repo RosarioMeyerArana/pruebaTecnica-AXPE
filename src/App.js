@@ -25,7 +25,6 @@ const App = () => {
 
   const handleAddFavorites = (id) => {
     const foundItemIndex = data.indexOf(data.find((item) => item.id === id))
-    console.log(foundItemIndex)
     const addingFavArray = []
     for(let i = 0; i < data.length; i++){
       if(i === foundItemIndex){
