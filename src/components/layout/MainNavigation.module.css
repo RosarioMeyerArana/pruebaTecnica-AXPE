@@ -6,6 +6,24 @@
     justify-content: space-between;
     background-color: #77002e;
     padding: 0 10%;
+    position: fixed;
+    top: 0;
+    transition: top 1s;
+  }
+  .navShow{
+    height: 5rem;
+    transition: height .5s;
+  }
+
+  .navShow * {
+    display: flex;
+  }
+  .navHide{
+    height: 0rem;
+    transition: height .5s;
+  }
+  .navHide *{
+    display: none;
   }
   
   .logo {
