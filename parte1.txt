@@ -1,0 +1,60 @@
+Problemas que detecto en el pseudocodigo:
+- Al inicializar un componente de tipo clase, es necesario agregar el extend React.component{ //codigo aquí dentro }, también cuando se usa este tipo de componentes(de clase), el método render() es el único método requerido, que en el pseudocodigo no está.
+- Al llamar al metodo constructor, es necesario llamar a super(props) antes de cualquier otra instrucción, para poder utilizar las props en nuestro componente (this.props). Entiendo que services = [] seria el punto de partida de estas props y que se quisiera asignar a props un estado llamado services? Y que este estado se inicie como un array vacio? En este caso, un estado se inicializaria luego del método super() como this.state { services: []}
+
+- El problema principal de getTotal es que se hace un loop de services que es un array vacío, no lleva información. 
+- Se quiere llamar a services como this.services pero como dije anteriormente no va a ser posible acceder ya que no sería una prop ni está inicializada como estado.
+- Dentro de ForEach, lleva dos parámetros, service e index, si bien service se usa dentro de esta función, index no se utiliza, por lo que no seria necesario declararla.
+- Dentro de este forEach loop, se declara let multimiediaContent, y se llama a una función de este service. Si no hay una reasignación de este valor multimediaContent, se tendría que declarar como CONST ya que ahi evitaríamos una reasignación innecesaria. Por otro lado, mencione que se llama a una función de service.getMultimediaContent pero esta no se esta llamando al haber un espacio entre getMultimediaContent y () (estos paréntesis llamarían a la ejecución de la función), y bueno obviamente partimos de que services es un array vacio por lo que no hay informacion dentro.
+- Dentro del if el principal error es nombrar el typeof ya que este devolvería la información del tipo de valor de service (que podría ser un string, boolean, función, object, etc), luego se usa un == para comparar que sea igual, pero se podría usar === para ser mas exacto y que el valor coincida 100%
+- StreamingService, DownloadSerivce y PremiumContent no están declaradas en ningun lado, por lo que se debería convertir a string 
+
+
+
+
+Mi solucion en pseudocodigo:
+
+class RegisteredUser extends React.Component {
+  constructor(props) {
+    super(props)
+    this.state = {
+    services: ['StreamingService', 'PremiumContent'],
+    total: 0
+    };
+  }
+
+  getTotal(){
+    let total = 0
+    this.state.services.map((service) => {
+      // const multimediaContent = service.getMultimediaContent()
+      if(service === 'StreamingService'){
+        total += 1
+      } else if(service === 'DownloadService'){
+        total = total + 2
+      } else if(service === 'PremiumContent'){
+        total += 3
+      }
+      return total
+    })
+
+    this.setState({total: total})
+  }
+  
+  render() {
+      return (
+      <div>
+        <div> 
+          Services: {this.state.services.map((serv)=> <span key={serv}>{serv} </span>)}
+        </div>
+        <div>
+          Total for all services: {this.state.total}
+        </div>
+        <div>
+          <button onClick={this.getTotal.bind(this)}> Calculate Total </button>
+        </div>
+      </div>
+    )
+  }
+}
+
+export default RegisteredUser
