@@ -11,6 +11,9 @@ export default function FavoritesPage({favorites, handleAddFavorites}) {
         {
           favorites?.map((item) => <MeetupItem key={item.id} item={item} handleAddFavorites={handleAddFavorites} />)
         }
+        {
+          favorites.length === 0 && <div>Oops! you don't have favorites listed yet</div>
+        }
         </ul>
       </section>
     </Layout>
