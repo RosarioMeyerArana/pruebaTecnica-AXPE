@@ -2,7 +2,7 @@ import { useState, useEffect } from 'react';
 import classes from "./MainNavigation.module.css";
 import { NavLink } from 'react-router-dom';
 
-export default function MainNavigation() {
+export default function MainNavigation({ favorites }) {
   const [showNav, setShowNav] = useState(true)
   const [prevScrollPos, setPrevScrollPos] = useState(0)
 
@@ -43,7 +43,7 @@ export default function MainNavigation() {
           <li>
             <NavLink to="/favorites">
               My Favorites
-              <span className={classes.badge}>{0}</span>
+              <span className={classes.badge}>{favorites.length}</span>
             </NavLink>
           </li>
         </ul>

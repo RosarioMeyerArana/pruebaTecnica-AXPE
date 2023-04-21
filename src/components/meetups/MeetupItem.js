@@ -1,7 +1,7 @@
 import classes from "./MeetupItem.module.css";
 import Card from "../ui/Card";
 
-export default function MeetupItem({item}) {
+export default function MeetupItem({item, handleAddFavorites}) {
 
   return (
     <li className={classes.item} data-test='meet-up-item'>
@@ -15,7 +15,10 @@ export default function MeetupItem({item}) {
           <p>{item.description}</p>
         </div>
         <div className={classes.actions}>
-          <button>Add to favorites</button>
+          <button onClick={() => handleAddFavorites(item.id)}>
+            {
+              item.favorite === true ? 'Remove from favorites' : 'Add to favorites'
+          }</button>
         </div>
       </Card>
     </li>

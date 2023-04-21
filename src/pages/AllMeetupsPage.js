@@ -3,14 +3,14 @@ import Layout from "../components/layout/Layout";
 import classes from "./../components/meetups/MeetupList.module.css";
 
 
-export default function AllMeetupsPage({data}) {
+export default function AllMeetupsPage({data, handleAddFavorites}) {
   return (
     <Layout>
       <section>
         <h1>All Meetups</h1>
         <ul className={classes.list}>
           {
-            data?.map((item) => <MeetupItem key={item.id} item={item} /> )
+            data?.map((item) => <MeetupItem key={item.id} item={item} handleAddFavorites={handleAddFavorites} /> )
           }
         </ul>
       </section>
