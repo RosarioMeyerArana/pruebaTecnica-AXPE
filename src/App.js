@@ -16,6 +16,11 @@ const App = () => {
     .then((json) => setData(json) )
   }, [])
 
+
+  const handleAddMeetup = (newMeetup) => {
+    setData([...data, { id: `m${data.length + 1}`, ...newMeetup}])
+  } 
+
   return (
     <div data-test="app">
       <BrowserRouter>
@@ -25,7 +30,7 @@ const App = () => {
                   <FavoritesPage />
               </Route>
               <Route path="/newpage">
-                  <NewMeetupsPage />
+                  <NewMeetupsPage handleAddMeetup={handleAddMeetup} />
               </Route>
               <Route path="/">
               <AllMeetupsPage data={data}/>
